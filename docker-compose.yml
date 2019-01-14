@@ -1,0 +1,28 @@
+version: "3"
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    build:
+      context: .
+      dockerfile: nginx.${APP_ENV}.dockerfile
+    depends_on:
+      - django
+    ports:
+      - "80:80"
+    networks:
+      - flashy-cards-network
+  django:
+    container_name: django
+    image: django
+    build:
+      context: .
+      dockerfile: django.${APP_ENV}.dockerfile
+    ports:
+      - "8000"
+    volumes:
+      - ./backend:/usr/src/app/
+    networks:
+      - flashy-cards-network
+networks:
+  flashy-cards-network:
