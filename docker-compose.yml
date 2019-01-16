@@ -8,8 +8,19 @@ services:
       dockerfile: nginx.${APP_ENV}.dockerfile
     depends_on:
       - django
+      - node
     ports:
       - "80:80"
+    networks:
+      - flashy-cards-network
+  node:
+    container_name: node
+    image: node
+    build:
+      context: .
+      dockerfile: node.${APP_ENV}.dockerfile
+    ports:
+      - "3000"
     networks:
       - flashy-cards-network
   django:
