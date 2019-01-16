@@ -1,4 +1,4 @@
-FROM 8.15.0-jessie
+FROM node:8.15.0-jessie
 COPY ./frontend /usr/src/app
 COPY ./node-scripts/run.sh /usr/src/app/
 WORKDIR /usr/src/app
