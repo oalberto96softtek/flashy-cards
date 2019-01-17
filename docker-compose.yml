@@ -29,11 +29,32 @@ services:
     build:
       context: .
       dockerfile: django.${APP_ENV}.dockerfile
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=${APP_ENV}
     ports:
       - "8000"
     volumes:
       - ./backend:/usr/src/app/
     networks:
       - flashy-cards-network
+      - flashy-cards-db-network
+  db:
+    container_name: db
+    image: db
+    build:
+      context: .
+      dockerfile: mysql.dockerfile
+    ports:
+      - "3306"
+    networks:
+      - flashy-cards-db-network
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./:/usr/src/app
+
 networks:
   flashy-cards-network:
+  flashy-cards-db-network:
