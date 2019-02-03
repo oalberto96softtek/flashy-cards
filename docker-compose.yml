@@ -9,6 +9,8 @@ services:
     depends_on:
       - django
       - node
+    volumes:
+      - ${MEDIA_ROOT}:/usr/share/nginx/html
     ports:
       - "80:80"
     networks:
@@ -18,6 +20,9 @@ services:
     build:
       context: .
       dockerfile: node.${APP_ENV}.dockerfile
+    enviroment:
+      - REACT_APP_MEDIA_SERVER=${REACT_APP_MEDIA_SERVER}
+      - REACT_APP_API_SERVER=${REACT_APP_API_SERVER}
     ports:
       - "3000"
     networks:
@@ -32,6 +37,7 @@ services:
       - db
     environment:
       - APP_ENV=${APP_ENV}
+      - MEDIA_ROOT=${MEDIA_ROOT}
     ports:
       - "8000"
     volumes:
