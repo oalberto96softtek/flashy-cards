@@ -41,6 +41,7 @@ services:
     ports:
       - "8000"
     volumes:
+      - ${MEDIA_ROOT}:${MEDIA_ROOT}
       - ./backend:/usr/src/app/
     networks:
       - flashy-cards-network
