@@ -20,7 +20,7 @@ services:
     build:
       context: .
       dockerfile: node.${APP_ENV}.dockerfile
-    enviroment:
+    environment:
       - REACT_APP_MEDIA_SERVER=${REACT_APP_MEDIA_SERVER}
       - REACT_APP_API_SERVER=${REACT_APP_API_SERVER}
     ports:
